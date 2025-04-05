@@ -43,6 +43,7 @@
     <string name="medtronic_error_pump_wrong_max_basal_set">泵上设置的错误的最大大剂量数 (必须为 %1$.2f)。</string>
     <string name="medtronic_error_operation_not_possible_no_configuration">操作是不可能的。\n\n 您首先需要配置美敦力泵 ，然后才能使用此操作。</string>
     <string name="medtronic_error_pump_24h_time_change_requested">请求了超过 24 小时的时间更改。</string>
+    <string name="debug_info">%1$.1f %2$s (%3$s)</string>
     <!-- MDT History -->
     <!--    <string name="medtronic_history_group_basal">Basals</string>-->
     <!--    <string name="medtronic_history_group_configuration">Configurations</string>-->
