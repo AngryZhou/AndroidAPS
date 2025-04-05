@@ -576,20 +576,24 @@ class MedtronicPumpPlugin @Inject constructor(
         if (clock == null) return
         val timeDiff = abs(clock.timeDifference)
         if (timeDiff > 20) {
-            //Log 722 info
-            medtronicUtil.sendNotification2(MedtronicNotificationType.PrintDebugInfo, "year is ${clock.localDeviceTime.year}")
+            // if (clock.localDeviceTime.year <= 2015 || timeDiff <= 24 * 60 * 60) {
+            //     aapsLogger.info(LTag.PUMP, String.format(Locale.ENGLISH, "MedtronicPumpPlugin::checkTimeAndOptionallySetTime - Time difference is %d s. Set time on pump.", timeDiff))
+            //     rileyLinkMedtronicService?.medtronicUIComm?.executeCommand(MedtronicCommandType.SetRealTimeClock)
+            //     if (clock.timeDifference == 0) {
+            //         uiInteraction.addNotificationValidFor(Notification.INSIGHT_DATE_TIME_UPDATED, rh.gs(R.string.pump_time_updated), Notification.INFO, 60)
+            //     }
+            // } else {
+            //     if (clock.localDeviceTime.year > 2015) {
+            //         aapsLogger.error(String.format(Locale.ENGLISH, "MedtronicPumpPlugin::checkTimeAndOptionallySetTime - Time difference over 24h requested [diff=%d s]. Doing nothing.", timeDiff))
+            //         medtronicUtil.sendNotification(MedtronicNotificationType.TimeChangeOver24h, rh)
+            //     }
+            // }
 
-            if (clock.localDeviceTime.year <= 2015 || timeDiff <= 24 * 60 * 60) {
-                aapsLogger.info(LTag.PUMP, String.format(Locale.ENGLISH, "MedtronicPumpPlugin::checkTimeAndOptionallySetTime - Time difference is %d s. Set time on pump.", timeDiff))
-                rileyLinkMedtronicService?.medtronicUIComm?.executeCommand(MedtronicCommandType.SetRealTimeClock)
-                if (clock.timeDifference == 0) {
-                    uiInteraction.addNotificationValidFor(Notification.INSIGHT_DATE_TIME_UPDATED, rh.gs(R.string.pump_time_updated), Notification.INFO, 60)
-                }
-            } else {
-                if (clock.localDeviceTime.year > 2015) {
-                    aapsLogger.error(String.format(Locale.ENGLISH, "MedtronicPumpPlugin::checkTimeAndOptionallySetTime - Time difference over 24h requested [diff=%d s]. Doing nothing.", timeDiff))
-                    medtronicUtil.sendNotification(MedtronicNotificationType.TimeChangeOver24h, rh)
-                }
+            //Force set 722 time same as phone, because my 722 battery was broken, then can not be save time when replace battery.
+            aapsLogger.info(LTag.PUMP, String.format(Locale.ENGLISH, "MedtronicPumpPlugin::checkTimeAndOptionallySetTime - Time difference is %d s. Set time on pump.", timeDiff))
+            rileyLinkMedtronicService?.medtronicUIComm?.executeCommand(MedtronicCommandType.SetRealTimeClock)
+            if (clock.timeDifference == 0) {
+                uiInteraction.addNotificationValidFor(Notification.INSIGHT_DATE_TIME_UPDATED, rh.gs(R.string.pump_time_updated), Notification.INFO, 60)
             }
         } else {
             aapsLogger.info(LTag.PUMP, String.format(Locale.ENGLISH, "MedtronicPumpPlugin::checkTimeAndOptionallySetTime - Time difference is %d s. Do nothing.", timeDiff))
