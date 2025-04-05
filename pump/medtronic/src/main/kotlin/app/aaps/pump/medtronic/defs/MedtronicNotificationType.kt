@@ -23,7 +23,9 @@ enum class MedtronicNotificationType(
     PumpWrongTimeNormal(R.string.medtronic_notification_check_time_date, Notification.NORMAL),
     TimeChangeOver24h(
         Notification.OVER_24H_TIME_CHANGE_REQUESTED, R.string.medtronic_error_pump_24h_time_change_requested, Notification.URGENT
-    );
+    ),
+    PrintDebugInfo(Notification.OVER_24H_TIME_CHANGE_REQUESTED, R.string.mdt_last_bolus, Notification.NORMAL)
+    ;
 
     constructor(resourceId: Int, notificationUrgency: Int) : this(Notification.MEDTRONIC_PUMP_ALARM, resourceId, notificationUrgency)
 }
