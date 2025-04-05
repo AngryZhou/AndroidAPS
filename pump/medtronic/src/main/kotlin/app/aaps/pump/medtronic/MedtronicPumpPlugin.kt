@@ -577,8 +577,8 @@ class MedtronicPumpPlugin @Inject constructor(
         val timeDiff = abs(clock.timeDifference)
         if (timeDiff > 20) {
             //Log 722 info
-            medtronicUtil.sendNotification(MedtronicNotificationType.PrintDebugInfo, rh, timeDiff, "------", "diff 差距")
-            medtronicUtil.sendNotification(MedtronicNotificationType.PrintDebugInfo, rh, clock.localDeviceTime.year, "-----", "年")
+            medtronicUtil.sendNotification2(MedtronicNotificationType.PrintDebugInfo, rh.gs(R.string.debug_info, timeDiff, "------", "diff 差距"))
+            medtronicUtil.sendNotification2(MedtronicNotificationType.PrintDebugInfo, rh.gs(clock.localDeviceTime.year, "-----", "年") )
 
             if (clock.localDeviceTime.year <= 2015 || timeDiff <= 24 * 60 * 60) {
                 aapsLogger.info(LTag.PUMP, String.format(Locale.ENGLISH, "MedtronicPumpPlugin::checkTimeAndOptionallySetTime - Time difference is %d s. Set time on pump.", timeDiff))

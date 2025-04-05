@@ -115,6 +115,14 @@ class MedtronicUtil @Inject constructor(
         )
     }
 
+    fun sendNotification2(notificationType: MedtronicNotificationType, debugString: String, vararg parameters: Any?) {
+        uiInteraction.addNotification(
+            notificationType.notificationType,
+            debugString,
+            notificationType.notificationUrgency
+        )
+    }
+
     fun dismissNotification(notificationType: MedtronicNotificationType, rxBus: RxBus) {
         rxBus.send(EventDismissNotification(notificationType.notificationType))
     }
